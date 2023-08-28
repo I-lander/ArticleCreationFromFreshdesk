@@ -2,6 +2,7 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import express from "express";
 import {
+  articleCreation,
   getTicketConversations,
   getTicketDescription,
 } from "./api/freshdesk.js";
@@ -32,16 +33,17 @@ app.get("/generate-article", async (req, res) => {
       fullMessage,
       ARTICLE_MESSAGES
     );
-    articleDescription = articleDescription.replace(/\r?\n|\r/g, " ");
 
     if (createArticle) {
-      // const article = articleCreation(
-      //   `Artcile from ticket ${ticketId}`,
-      //   articleDescription,
-      //   folderId
-      // );
-      //
-      // res.status(200).json({ article });
+      const folderId = "43000591618"; // Change it if needed / It corresponds to xDI - Internal Only > Articles drafts
+
+      const article = await articleCreation(
+        `Artcile from ticket ${ticketId}`,
+        articleDescription,
+        folderId
+      );
+
+      res.status(200).json({ article });
     } else {
       res.status(200).json({ articleDescription });
     }

@@ -60,7 +60,7 @@ export const getTicketConversations = async (ticketId) => {
 };
 
 export const articleCreation = async (title, description, folderId) => {
-  const SOLUTIONS_ENDPOINT = `https://semarchysupport.freshdesk.com/api/v2/solutions/folders/${folderId}/articles;`;
+  const SOLUTIONS_ENDPOINT = `https://semarchysupport.freshdesk.com/api/v2/solutions/folders/${folderId}/articles`;
 
   const articleData = {
     title: title,
