@@ -6,7 +6,6 @@ dotenv.config();
 const API_KEY = process.env.FRESHDESK_API_KEY;
 
 const API_ENDPOINT = "https://semarchysupport.freshdesk.com/api/v2/tickets/";
-const SOLUTIONS_ENDPOINT = "https://semarchysupport.freshdesk.com/api/v2/solutions/articles"; 
 
 const headers = {
   "Content-Type": "application/json",
@@ -14,7 +13,7 @@ const headers = {
 };
 const headersé = {
   "Content-Type": "application/json",
-  Authorization: "Basic " + Buffer.from(`${API_KEY}:`).toString("base64"), 
+  Authorization: "Basic " + Buffer.from(`${API_KEY}:`).toString("base64"),
 };
 
 export const getTicketDescription = async (ticketId) => {
@@ -60,21 +59,20 @@ export const getTicketConversations = async (ticketId) => {
   }
 };
 
-
 export const articleCreation = async (title, description, folderId) => {
-  const url = SOLUTIONS_ENDPOINT;
+  const SOLUTIONS_ENDPOINT = `https://semarchysupport.freshdesk.com/api/v2/solutions/folders/${folderId}/articles;`;
 
   const articleData = {
     title: title,
     description: description,
-    folder_id: folderId
+    status: 1,
   };
 
   try {
-    const response = await fetch(url, {
-      method: 'POST',
+    const response = await fetch(SOLUTIONS_ENDPOINT, {
+      method: "POST",
       headers: headers,
-      body: JSON.stringify(articleData)
+      body: JSON.stringify(articleData),
     });
 
     if (!response.ok) {
