@@ -12,7 +12,7 @@ const ARTICLE_MESSAGES = [
   {
     role: "system",
     content:
-      "You must wirte only the article content. It must be as complete as possible and contain all technical point present in the initial description. It must be written as a documentation article.",
+      "You must wirte only the article content. It must be as complete as possible and contain all technical points present in the initial description. It must be written as a documentation article.",
   },
   {
     role: "system",
@@ -21,7 +21,7 @@ const ARTICLE_MESSAGES = [
   },
   {
     role: "system",
-    content: `You must write in HTML and use the following template to write the answer ${articleTemplate}.`,
+    content: `You must write in HTML and use the following template to write the answer: ${articleTemplate}.`,
   },
 ];
 

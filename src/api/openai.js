@@ -32,7 +32,7 @@ const createChatCompletion = async (messages) => {
     }
 
     const result = await response.json();
-    return result.choices[0].message.content;
+    return result.choices[0].message.content.replace(/\r?\n/g, "");
   } catch (error) {
     console.error(error);
     throw error;
