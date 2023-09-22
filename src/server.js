@@ -19,6 +19,10 @@ app.get("/generate-article", async (req, res) => {
   try {
     const ticketId = req.query.ticketId;
     const createArticle = req.query.createArticle === "true";
+    const folderId = req.query.folderId === "43000591618"
+
+    // XDI folder = "43000591618"
+    // XDM folder = "43000591882"
 
     if (!ticketId) {
       res.status(400).json({ error: "Ticket ID is required" });
@@ -35,8 +39,6 @@ app.get("/generate-article", async (req, res) => {
     );
 
     if (createArticle) {
-      const folderId = "43000591618"; // Change it if needed / It corresponds to xDI - Internal Only > Articles drafts
-
       const article = await articleCreation(
         `Artcile from ticket ${ticketId}`,
         articleDescription,

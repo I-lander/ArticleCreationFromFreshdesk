@@ -1,4 +1,4 @@
-const articleTemplate = `<h1>A relevant title</h1>\r\n
+const articleTemplate = `<h1 style="color:red">A relevant title</h1>\r\n
 <h2>Symptom</h2>\r\n
 The error or the issue as initally reported\r\n
 <h2>Solution</h2>\r\
