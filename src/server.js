@@ -1,4 +1,5 @@
 import bodyParser from "body-parser";
+import { load as loadCheerio } from "cheerio";
 import dotenv from "dotenv";
 import express from "express";
 import {
@@ -19,7 +20,7 @@ app.get("/generate-article", async (req, res) => {
   try {
     const ticketId = req.query.ticketId;
     const createArticle = req.query.createArticle === "true";
-    const folderId = req.query.folderId === "43000591618"
+    const folderId = req.query.folderId || "43000591618";
 
     // XDI folder = "43000591618"
     // XDM folder = "43000591882"
@@ -39,9 +40,16 @@ app.get("/generate-article", async (req, res) => {
     );
 
     if (createArticle) {
+      const $ = loadCheerio(articleDescription);
+      const articleTitle = $("h1").prop("outerHTML");
+      $("h1").remove();
+      const ticketUrl = `</br><a href="https://support.semarchy.com/a/tickets/${ticketId}" target="_blank">https://support.semarchy.com/a/tickets/${ticketId}</a></br>`;
+      const modifiedHtml = $.html();
+      const articleContent = ticketUrl + modifiedHtml;
+
       const article = await articleCreation(
-        `Artcile from ticket ${ticketId}`,
-        articleDescription,
+        articleTitle,
+        articleContent,
         folderId
       );
 
